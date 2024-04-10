@@ -8,7 +8,7 @@ import {
   readContract,
   waitForTransactionReceipt,
 } from "@wagmi/core";
-import { HORSE_TOKEN_ADDRESS, RECEIVE_TEST_WALLET } from "../constants";
+import { FAKE_WETH_ADDRESS, RECEIVE_TEST_WALLET } from "../constants";
 import styles from "../styles/SendTokenButton.module.css";
 
 export function SendTokenButton() {
@@ -23,7 +23,7 @@ export function SendTokenButton() {
       // Check allowance
       const allowance = await readContract(config, {
         abi,
-        address: HORSE_TOKEN_ADDRESS,
+        address: FAKE_WETH_ADDRESS,
         functionName: "allowance",
         args: [account.address, account.address],
       });
@@ -33,7 +33,7 @@ export function SendTokenButton() {
       if (parseFloat(allowanceAmt) < parseFloat(smallValueAmount)) {
         const approveResults = await writeContract(config, {
           abi,
-          address: HORSE_TOKEN_ADDRESS,
+          address: FAKE_WETH_ADDRESS,
           functionName: "approve",
           args: [account.address, tokenAmountToApprove],
         });
@@ -43,7 +43,7 @@ export function SendTokenButton() {
       }
       const transformTokenResults = await writeContract(config, {
         abi,
-        address: HORSE_TOKEN_ADDRESS,
+        address: FAKE_WETH_ADDRESS,
         functionName: "transferFrom",
         args: [
           account.address,

@@ -3,7 +3,7 @@ import styles from "../styles/MyWalletInfo.module.css";
 import React from "react";
 import { formatEther } from "viem";
 import abi from "../abi/erc20.abi.json";
-import { HORSE_TOKEN_ADDRESS } from "../constants";
+import { HORSE_TOKEN_ADDRESS, FAKE_WETH_ADDRESS } from "../constants";
 import { SendTokenButton } from "./SendTokenButton";
 
 export function MyWalletInfo() {
@@ -15,7 +15,7 @@ export function MyWalletInfo() {
 
   const fakeWETHBalance = useReadContract({
     abi,
-    address: HORSE_TOKEN_ADDRESS,
+    address: FAKE_WETH_ADDRESS,
     functionName: "balanceOf",
     args: [account.address],
   });
