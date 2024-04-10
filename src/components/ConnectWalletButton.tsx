@@ -1,6 +1,6 @@
-import { useAccount, useConnect, useDisconnect } from "wagmi";
-import styles from "../styles/Button.module.css";
-import React, { ReactNode, MouseEventHandler } from "react";
+import { Connector, useAccount, useConnect, useDisconnect } from "wagmi";
+import styles from "../styles/ConnectWalletButton.module.css";
+import React from "react";
 
 export function ConnectWalletButton() {
   const account = useAccount();
@@ -11,7 +11,11 @@ export function ConnectWalletButton() {
       className={styles.button}
       onClick={() => {
         if (account.status !== "connected") {
-          connect({ connector: connectors[1] });
+          connect({
+            connector: connectors.find(
+              (connector) => connector.name === "MetaMask"
+            ) as Connector,
+          });
         } else {
           disconnect();
         }
